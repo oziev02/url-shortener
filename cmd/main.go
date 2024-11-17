@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
+	"github.com/oziev02/url-shortener/internal/hello"
 	"net/http"
 )
 
 func main() {
 	router := http.NewServeMux()
-	NewHelloHandler(router)
+	hello.NewHelloHandler(router)
 
 	server := http.Server{
 		Addr:    ":8081",
