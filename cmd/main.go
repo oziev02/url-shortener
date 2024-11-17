@@ -3,14 +3,16 @@ package main
 import (
 	"fmt"
 	"github.com/oziev02/url-shortener/configs"
-	"github.com/oziev02/url-shortener/internal/hello"
+	"github.com/oziev02/url-shortener/internal/auth"
 	"net/http"
 )
 
 func main() {
 	conf := configs.LoadConfig()
 	router := http.NewServeMux()
-	hello.NewHelloHandler(router)
+	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
+		Config: conf,
+	})
 
 	server := http.Server{
 		Addr:    ":8081",
