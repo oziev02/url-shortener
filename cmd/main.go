@@ -2,13 +2,16 @@ package main
 
 import (
 	"fmt"
+	"net/http"
+
 	"github.com/oziev02/url-shortener/configs"
 	"github.com/oziev02/url-shortener/internal/auth"
-	"net/http"
+	"github.com/oziev02/url-shortener/pkg/db"
 )
 
 func main() {
 	conf := configs.LoadConfig()
+	_ = db.NewDb(conf)
 	router := http.NewServeMux()
 	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
 		Config: conf,
