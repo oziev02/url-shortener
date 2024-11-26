@@ -14,7 +14,7 @@ type Link struct {
 
 func NewLink(url string) *Link {
 	link := &Link{
-		Url:  url,
+		Url: url,
 	}
 	link.GenerateHash() // Задаем хэш
 	return link

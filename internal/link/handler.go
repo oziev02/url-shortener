@@ -65,8 +65,8 @@ func (handler *LinkHandler) Update() http.HandlerFunc {
 		}
 		link, err := handler.LinkRepository.Update(&Link{
 			Model: gorm.Model{ID: uint(id)},
-			Url: body.Url,
-			Hash: body.Hash,
+			Url:   body.Url,
+			Hash:  body.Hash,
 		})
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)

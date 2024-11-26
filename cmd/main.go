@@ -7,6 +7,7 @@ import (
 	"github.com/oziev02/url-shortener/configs"
 	"github.com/oziev02/url-shortener/internal/auth"
 	"github.com/oziev02/url-shortener/internal/link"
+	"github.com/oziev02/url-shortener/internal/user"
 	"github.com/oziev02/url-shortener/pkg/db"
 	"github.com/oziev02/url-shortener/pkg/middleware"
 )
@@ -18,10 +19,15 @@ func main() {
 
 	// Repositories
 	linkRepository := link.NewLinkRepository(db)
+	userRepository := user.NewUserRepository(db)
+
+	// Services
+	authService := auth.NewAuthService(userRepository)
 
 	// Handler
 	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
-		Config: conf,
+		Config:      conf,
+		AuthService: authService,
 	})
 	link.NewLinkHandler(router, link.LinkHandlerDeps{
 		LinkRepository: linkRepository,
@@ -29,7 +35,7 @@ func main() {
 
 	// Middlewares
 	stack := middleware.Chain(
-		middleware.CORS, 
+		middleware.CORS,
 		middleware.Logging,
 	)
 
