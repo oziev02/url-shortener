@@ -1,5 +1,6 @@
-.idea
-postgres-data
-venv
-.env
-.vscode/
+/.idea
+/postgres-data
+/venv
+/.env
+/.vscode/
+/cmd/.env

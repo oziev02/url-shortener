@@ -4,14 +4,15 @@ import (
 	"errors"
 
 	"github.com/oziev02/url-shortener/internal/user"
+	"github.com/oziev02/url-shortener/pkg/di"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type AuthService struct {
-	UserRepository *user.UserRepository
+	UserRepository di.IUserRepository
 }
 
-func NewAuthService(userRepository *user.UserRepository) *AuthService {
+func NewAuthService(userRepository di.IUserRepository) *AuthService {
 	return &AuthService{
 		UserRepository: userRepository,
 	}
